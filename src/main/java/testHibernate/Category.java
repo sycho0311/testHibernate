@@ -24,6 +24,7 @@ public class Category {
 	
 	private String name;
 	
+	// collection
 	@OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch=FetchType.LAZY) // bidirection (cascade=CascadeType.ALL) // 연관 된 객체까지, persist delete
 	// FetchType LAZY : 필요시에만 child class read, performance issue
 	private Set<Product> products = new HashSet<Product>();

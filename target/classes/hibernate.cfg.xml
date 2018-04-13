@@ -5,6 +5,7 @@
 <hibernate-configuration>
 
 	<session-factory>
+	
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.username">root</property>
@@ -17,7 +18,10 @@
 
 		<!-- Mapping Info -->
 		<mapping class="testHibernate.Product" />
-		<mapping class="testHibernate.Category" /> 
+		<mapping class="testHibernate.Category" />
+		<mapping class="testHibernate.Person" />
+		<mapping class="testHibernate.Licence" />
+		 
 	</session-factory>
 	
 </hibernate-configuration>

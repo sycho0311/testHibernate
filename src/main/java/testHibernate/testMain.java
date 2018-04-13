@@ -1,5 +1,7 @@
 package testHibernate;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,6 +19,7 @@ public class testMain {
 		
 		sessionFactory = new Configuration().configure().buildSessionFactory();
 		
+		/*
 		Category category1 = new Category();
 		category1.setName("Computer");
 
@@ -46,20 +49,43 @@ public class testMain {
 		product3.setCategory(category2);
 		
 		category2.getProducts().add(product3);
+		*/
+		
+		Person person1 = new Person();
+		person1.setFirstName("Sungyoon");
+		person1.setLastName("Cho");
+		
+		Licence licence1 = new Licence();
+		licence1.setLicenceNumber("123456");
+		licence1.setIssueDate(new Date());
+		licence1.setPerson(person1);
+		
+		person1.setLicence(licence1);
+		
+		Person person2 = new Person();
+		person2.setFirstName("Alice");
+		person2.setLastName("Lee");
+		
+		Licence licence2 = new Licence();
+		licence2.setLicenceNumber("456789");
+		licence2.setIssueDate(new Date());
+		licence2.setPerson(person2);
+		
+		person2.setLicence(licence2);
 		
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		
 		// Parent, One save
-		session.save(category1);
-		session.save(category2);
+		session.save(person1);
+		session.save(person2);
 
 		// save Product 1, 2, 3 but Cascade product -> category save category 1, 2
 		// session.save(product1);
 		// session.save(product2);
 		// session.save(product3);
 		
-		session.delete(category1);
+		// session.delete(category1);
 		
 		tx.commit();
 		session.close();
