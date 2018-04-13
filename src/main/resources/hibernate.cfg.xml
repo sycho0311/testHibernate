@@ -15,6 +15,9 @@
 		<property name="format_sql">false</property>
 		<property name="hibernate.hbm2ddl.auto"> create </property>
 
+		<!-- Mapping Info -->
 		<mapping class="testHibernate.Product" />
+		<mapping class="testHibernate.Category" /> 
 	</session-factory>
+	
 </hibernate-configuration>

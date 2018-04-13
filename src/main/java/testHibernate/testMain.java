@@ -17,15 +17,49 @@ public class testMain {
 		
 		sessionFactory = new Configuration().configure().buildSessionFactory();
 		
-		Product product = new Product();
-		product.setName("notebook");
-		product.setPrice(1000000);
-		product.setDescription("Awesome notebook");
+		Category category1 = new Category();
+		category1.setName("Computer");
+
+		Category category2 = new Category();
+		category2.setName("Car");
+		
+		Product product1 = new Product();
+		product1.setName("notebook");
+		product1.setPrice(1000000);
+		product1.setDescription("Awesome notebook");
+		product1.setCategory(category1);
+		
+		category1.getProducts().add(product1); // bidirection
+
+		Product product2 = new Product();
+		product2.setName("Desktop");
+		product2.setPrice(2000000);
+		product2.setDescription("Powerful Desktop");
+		product2.setCategory(category1);
+		
+		category1.getProducts().add(product2); // bidirection
+		
+		Product product3 = new Product();
+		product3.setName("Sonanta");
+		product3.setPrice(30000000);
+		product3.setDescription("Popular Car");
+		product3.setCategory(category2);
+		
+		category2.getProducts().add(product3);
 		
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		
-		session.save(product);
+		// Parent, One save
+		session.save(category1);
+		session.save(category2);
+
+		// save Product 1, 2, 3 but Cascade product -> category save category 1, 2
+		// session.save(product1);
+		// session.save(product2);
+		// session.save(product3);
+		
+		session.delete(category1);
 		
 		tx.commit();
 		session.close();
